@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <div class='jumbotron'>
+      <h1>Track your learning.</h1>        
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h2>
+    <a href="{% url 'users:register' %}">Register an account</a> to make
+     your own Learning Log, and list the topics you're learning about.
+  </h2>
+  <h2>
+    Whenever you learn something new about a topic, make an entry 
+    summarizing what you've learned.
+  </h2>
+            <table border=1px>
+        <tr>
+            <th>姓名</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+
+        {% for entry in entries %}
+        <tr>
+            <td>{{entry.name}}</td>
+            <td>{{entry.date_added}}</td>
+            <td>{{entry.signup}}</td>
+            <td>{{entry.sex}}</td>
+            <td>{{entry.number}}</td>
+            <td>{{entry.phone}}</td>
+            <td>{{entry.bunk}}</td>
+            <td>{{entry.money}}</td>
+        {% endfor %}
+        </tr>
+        </table>
+{% endblock %}

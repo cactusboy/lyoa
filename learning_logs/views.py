@@ -20,6 +20,22 @@ def topics(request):
 
 
 @login_required
+def main(request):
+    """管理页"""
+    return render(request, 'learning_logs/main.html')
+
+
+def nav(request):
+    """侧边栏"""
+    return render(request, 'learning_logs/nav.html')
+
+
+def table(request):
+    """表格"""
+    return render(request, 'learning_logs/table.html')
+
+
+@login_required
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
     # 向数据库进行查询
@@ -43,9 +59,9 @@ def new_topic(request):
     else:
         form = TopicForm(request.POST)
         if form.is_valid():
-            new_topic = form.save(commit=False)     # 暂时不存入数据库
-            new_topic.owner = request.user          # 绑定user
-            new_topic.save()                        # 再存入数据库
+            new_topic = form.save(commit=False)  # 暂时不存入数据库
+            new_topic.owner = request.user  # 绑定user
+            new_topic.save()  # 再存入数据库
             # reverse 反向解析url
             return HttpResponseRedirect(reverse('learning_logs:topics'))
 
@@ -66,7 +82,6 @@ def new_entry(request, topic_id):
     else:
         form = EntryForm(data=request.POST)
         if form.is_valid():
-
             new_entry = form.save(commit=False)
             new_entry.topic = topic
             new_entry.save()
