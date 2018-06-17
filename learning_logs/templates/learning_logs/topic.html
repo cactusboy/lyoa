@@ -1,0 +1,55 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block header %}
+  <h2>{{ topic }}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新旅行者</a>
+  </p>
+            <table border=1px>
+        <tr>
+            <th>姓名</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+
+        {% for entry in entries %}
+        <tr>
+            <td>{{entry.name}}</td>
+            <td>{{entry.date_added}}</td>
+            <td>{{entry.signup}}</td>
+            <td>{{entry.sex}}</td>
+            <td>{{entry.number}}</td>
+            <td>{{entry.phone}}</td>
+            <td>{{entry.bunk}}</td>
+            <td>{{entry.money}}</td>
+        {% endfor %}
+        </tr>
+        </table>
+  {% for entry in entries %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ entry.name }}
+          <small>
+            <a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              编辑旅行者</a>
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ entry.text|linebreaks }}
+      </div>
+    </div> <!-- panel -->
+  {% empty %}
+    没有更多的人了
+  {% endfor %}
+
+{% endblock content %}

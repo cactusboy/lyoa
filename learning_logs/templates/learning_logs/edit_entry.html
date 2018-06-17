@@ -1,0 +1,14 @@
+{%extends "learning_logs/base.html" %}
+
+{% block content%}
+
+    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+
+    <p>编辑旅行者:</p>
+    <!-- 如果把下面的edit_entry改成new_entry会怎么样 -->
+    <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post"> 
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">保存</button>
+    </form>
+{% endblock content%}
