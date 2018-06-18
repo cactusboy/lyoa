@@ -1,6 +1,9 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
 
+{% load bootstrap3 %}
+<head>
+        {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
 {% block header %}
   <h2>添加新旅行团:</h2>
 {% endblock header %}
