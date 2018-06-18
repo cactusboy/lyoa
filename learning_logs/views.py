@@ -25,6 +25,11 @@ def main(request):
     return render(request, 'learning_logs/main.html')
 
 
+def preview(request):
+    """旅行团预览"""
+    return render(request, 'learning_logs/preview.html')
+
+
 def nav(request):
     """侧边栏"""
     return render(request, 'learning_logs/nav.html')
