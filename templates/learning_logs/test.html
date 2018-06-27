@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'learning_logs/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'learning_logs/css/WdatePicker.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'learning_logs/css/skin_/table.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'learning_logs/css/jquery.grid.css' %}" />
+
+
+    <title>表格</title>
+</head>
+
+{% block header %}
+  <h2>{{ topic }}</h2>
+    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
+{% endblock header %}
+
+{% block content %}
+
+            <table border=1px>
+        <tr>
+            <th>姓名</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+            <th>操作</th>
+        </tr>
+
+        {% for entry in entries %}
+        <tr>
+            <td>{{entry.name}}</td>
+            <td>{{entry.date_added}}</td>
+            <td>{{entry.signup}}</td>
+            <td>{{entry.sex}}</td>
+            <td>{{entry.number}}</td>
+            <td>{{entry.phone}}</td>
+            <td>{{entry.bunk}}</td>
+            <td>{{entry.money}}</td>
+            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              编辑</a></td>
+        {% empty %}
+                没有更多的人了
+        {% endfor %}
+        </tr>
+        </table>
+ <div class="search-box ue-clear">
+                    <div class="search-area">
+
+                        <div class="kv-item ue-clear">
+                            <label>选择类型:</label>
+                            <div class="kv-item-content">
+
+                                <select>
+
+                                <option>
+                                    {% for topic in topics %}
+                                    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+                                    {% endfor %}
+                                </option>
+
+                            </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-button">
+                        <input class="button" type="button" value="搜索一下" />
+                    </div>
+                </div>
+
+
+
+{% endblock content %}

@@ -15,5 +15,7 @@ urlpatterns = [
     path('main/', views.main, name='main'),
     path('main/nav.html', views.nav, name='nav'),
     path('main/table.html', views.table, name='table'),
-    path('main/preview.html', views.preview, name='preview')
+    path('main/preview.html', views.preview, name='preview'),
+    path('test/', views.test, name='test'),
+    path('main/topics.html', views.topicsmain, name='topicsmian'),
 ]

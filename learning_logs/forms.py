@@ -4,7 +4,7 @@ from .models import Topic, Entry
 
 class TopicForm(forms.ModelForm):
     class Meta(object):
-        date_start = forms.DateField()
+        # date_start = forms.DateField(label="测试")
         model = Topic   # 表单字段等于Topic模型中的字段
         fields = ['tour_name', 'text', 'date_start']    # 显示姓名，备注，开始日期字段
         labels = {'text': ''}       # 备注字段不显示label

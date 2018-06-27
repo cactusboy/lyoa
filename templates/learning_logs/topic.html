@@ -1,7 +1,8 @@
-{% extends "base.html" %}
+
 
 {% block header %}
   <h2>{{ topic }}</h2>
+    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
 {% endblock header %}
 
 {% block content %}
@@ -10,6 +11,7 @@
   </p>
             <table border=1px>
         <tr>
+            <th>序号</th>
             <th>姓名</th>
             <th>星期一</th>
             <th>星期二</th>
@@ -18,9 +20,10 @@
             <th>星期五</th>
             <th>星期六</th>
             <th>星期日</th>
+            <th>操作</th>
         </tr>
 
-        {% for entry in entries %}
+            {% for entry in entries %}
         <tr>
             <td>{{entry.name}}</td>
             <td>{{entry.date_added}}</td>
@@ -30,26 +33,19 @@
             <td>{{entry.phone}}</td>
             <td>{{entry.bunk}}</td>
             <td>{{entry.money}}</td>
+            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              编辑</a></td>
+        {% empty %}
+                没有更多的人了
         {% endfor %}
         </tr>
+
+        <tr>
+            <td>1</td>
+        </tr>
         </table>
-  {% for entry in entries %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>
-          {{ entry.name }}
-          <small>
-            <a href="{% url 'learning_logs:edit_entry' entry.id %}">
-              编辑旅行者</a>
-          </small>
-        </h3>
-      </div>
-      <div class="panel-body">
-        {{ entry.text|linebreaks }}
-      </div>
-    </div> <!-- panel -->
-  {% empty %}
-    没有更多的人了
-  {% endfor %}
+
+
+
 
 {% endblock content %}

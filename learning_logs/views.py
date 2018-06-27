@@ -115,3 +115,13 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+
+def test(request):
+    """测试页"""
+    return render(request, 'learning_logs/test.html')
+
+
+def topicsmain(request):
+    """mian里面的topics"""
+    return render(request, 'learning_logs/topics.html')
