@@ -1,0 +1,132 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test2</title>
+    <style>
+        #div1 {
+            border:1px solid #000099;
+            height: 60px;
+            width: 50px;
+            margin: 2px;
+            top:51px;
+            left: 1px;
+        }
+        #div2 {
+
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top:51px;
+            left: 59px;
+        }
+        #div3 {
+            border:1px solid #000099;
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            position: absolute;
+            top:51px;
+            left: 260px;
+        }
+        /* 表格边框变成细线 */
+        table {
+            border-collapse :collapse ;
+        }
+        /*td和th内容居中*/
+        td {
+            text-align: center;
+        }
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+
+{% block header %}
+    <!--
+  <h2>{{ topic }}</h2>
+    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
+    <a href="{% url 'learning_logs:table' %}">返回团员预览</a>
+    -->
+{% endblock header %}
+
+{% block content %}
+    <!--
+  <p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新旅行者</a>
+  </p>
+            <table border=1px>
+        <tr>
+
+            <th>姓名</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+            <th>操作</th>
+        </tr>
+
+            {% for entry in entries %}
+        <tr>
+            <td>{{entry.name}}</td>
+            <td>{{entry.date_added}}</td>
+            <td>{{entry.signup}}</td>
+            <td>{{entry.sex}}</td>
+            <td>{{entry.number}}</td>
+            <td>{{entry.phone}}</td>
+            <td>{{entry.bunk}}</td>
+            <td>{{entry.money}}</td>
+            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              编辑</a></td>
+        {% empty %}
+                没有更多的人了
+        {% endfor %}
+        </tr>
+        </table>
+-->
+
+    <!--确认书
+    <div id="div1">
+        <table border="1">
+            <tr>
+                <th width="66">序号</th>
+            </tr>
+            <tr><td>1</td></tr>
+            <tr><td>2</td></tr>
+            <tr><td>3</td></tr>
+            <tr><td>4</td></tr>
+            <tr><td>5</td></tr>
+        </table>
+    </div>
+    -->
+    <div id="div2">
+        <table border="1">
+            <tr>
+                <th width="66">姓名</th>
+                <th width="66">年龄</th>
+                <th width="66">铺位</th>
+            </tr>
+            {% for entry in entries %}
+            <tr>
+                <td>{{entry.name}}</td>
+                <td>{{entry.sex}}</td>
+                <td>{{entry.signup}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div id="div3">
+        <table border="1">
+            <tr><th width="200">明细</th></tr>
+        </table>
+    </div>
+
+
+
+{% endblock content %}

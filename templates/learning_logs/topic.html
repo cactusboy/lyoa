@@ -3,6 +3,7 @@
 {% block header %}
   <h2>{{ topic }}</h2>
     <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
+    <a href="{% url 'learning_logs:table' %}">返回团员预览</a>
 {% endblock header %}
 
 {% block content %}
@@ -11,7 +12,7 @@
   </p>
             <table border=1px>
         <tr>
-            <th>序号</th>
+
             <th>姓名</th>
             <th>星期一</th>
             <th>星期二</th>
@@ -38,10 +39,6 @@
         {% empty %}
                 没有更多的人了
         {% endfor %}
-        </tr>
-
-        <tr>
-            <td>1</td>
         </tr>
         </table>
 

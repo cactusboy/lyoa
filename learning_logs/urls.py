@@ -14,8 +14,9 @@ urlpatterns = [
     path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
     path('main/', views.main, name='main'),
     path('main/nav.html', views.nav, name='nav'),
-    path('main/table.html', views.table, name='table'),
+    path('main/table.html', views.topics_table, name='table'),
     path('main/preview.html', views.preview, name='preview'),
     path('test/', views.test, name='test'),
     path('main/topics.html', views.topicsmain, name='topicsmian'),
+    path('table_view/<int:topic_id>/', views.table_view, name='topic'),
 ]
