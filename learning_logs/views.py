@@ -47,7 +47,7 @@ def table(request):
     """表格"""
     return render(request, 'learning_logs/table.html')
 
-
+'''
 # 与topic一样性质的table_view，用来形成确认书
 @login_required
 def table_view(request, topic_id):
@@ -63,7 +63,7 @@ def table_view(request, topic_id):
 
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/table_view.html', context)
-
+'''
 
 @login_required
 def topic(request, topic_id):

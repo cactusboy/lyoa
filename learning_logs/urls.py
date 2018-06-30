@@ -18,5 +18,5 @@ urlpatterns = [
     path('main/preview.html', views.preview, name='preview'),
     path('test/', views.test, name='test'),
     path('main/topics.html', views.topicsmain, name='topicsmian'),
-    path('table_view/<int:topic_id>/', views.table_view, name='topic'),
+    # path('table_view/<int:topic_id>/', views.table_view, name='topic'),
 ]
