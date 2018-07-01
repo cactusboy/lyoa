@@ -47,23 +47,23 @@ def table(request):
     """表格"""
     return render(request, 'learning_logs/table.html')
 
-'''
+
 # 与topic一样性质的table_view，用来形成确认书
 @login_required
-def table_view(request, topic_id):
+def table1(request, topic_id):
     """显示单个主题及其所有的条目"""
     # 向数据库进行查询
-    topic = Topic.objects.get(id=topic_id)
+    tables = Topic.objects.get(id=topic_id)
     # topic = get_object_or_404(Topic, id = topic_id)   可代替，若不存在则返回404页面
 
     # 确保用户无法查看别人的Topic
-    if topic.owner != request.user:
+    if tables.owner != request.user:
         raise Http404
-    entries = topic.entry_set.order_by('-date_added')
+    entries1 = tables.entry_set.order_by('-date_added')
 
-    context = {'topic': topic, 'entries': entries}
-    return render(request, 'learning_logs/table_view.html', context)
-'''
+    context = {'tables': topic, 'entries': entries1}
+    return render(request, 'learning_logs/table1.html', context)
+
 
 @login_required
 def topic(request, topic_id):

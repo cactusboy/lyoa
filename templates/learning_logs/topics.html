@@ -9,9 +9,8 @@
   <ul>
     {% for topic in topics %}
       <li>
-        <h3>
-          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-        </h3>
+          <h3><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h3>
+            <p><a href="{% url 'learning_logs:topic' topic.id %}">团员预览</a></p>
       </li>
     {% empty %}
       <li>目前没有旅行团</li>

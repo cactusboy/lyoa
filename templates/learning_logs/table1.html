@@ -1,0 +1,46 @@
+
+
+{% block header %}
+  <h2>{{ topic }}</h2>
+    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
+    <a href="{% url 'learning_logs:table' %}">返回团员预览</a>
+{% endblock header %}
+
+{% block content %}
+
+            <table border=1px>
+        <tr>
+
+            <th>姓名</th>
+            <th>团队名称</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+            <th>操作</th>
+        </tr>
+
+            {% for entry in entries %}
+        <tr>
+            <td>{{entry.name}}</td>
+            <td>{{entry.date_added}}</td>
+            <td>{{entry.signup}}</td>
+            <td>{{entry.sex}}</td>
+            <td>{{entry.number}}</td>
+            <td>{{entry.phone}}</td>
+            <td>{{entry.bunk}}</td>
+            <td>{{entry.money}}</td>
+            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              编辑</a></td>
+        {% empty %}
+                没有更多的人了
+        {% endfor %}
+        </tr>
+        </table>
+
+
+
+
+{% endblock content %}
