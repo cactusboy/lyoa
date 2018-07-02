@@ -1,46 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test2</title>
+    <style>
+        #p1 {
+            text-align: center;
+        }
+        
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            border: 1px solid #000099;
+            width: 700px;
+            height: 800px;
+        }
+        
+        #div1 {
+            /*border: 1px solid #000099;*/
+            height: 200px;
+            width: 60px;
+            margin: 2px;
+            position: absolute;
+            top: 235px;
+            left: 38px;
+        }
+        
+        #div2 {
+            height: 60px;
+            width: 280px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 235px;
+            left: 97px;
+        }
+        
+        #div3 {
+            /*border: 1px solid #000099;*/
+            height: 60px;
+            width: 270px;
+            margin: 2px;
+            position: absolute;
+            top: 235px;
+            left: 376px;
+        }
+        
+        #div4 {
+            height: 200px;
+            width: 600px;
+            margin: 2px;
+            position: absolute;
+            top: 572px;
+            left: 38px;
+        }
+        
+        #divtopic {
+            border: 1px solid #000099;
+            height: 311px;
+            width: 260px;
+            margin: 2px;
+            position: absolute;
+            top: 260px;
+            left: 376px;
+        }
+        
+        #div5 {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            bottom: 0;
+        }
+        
+        #div6 {
+            top: 470px;
+            left: 430px;
+            height: 200px;
+            width: 200px;
+            margin: 2px;
+            position: relative;
 
-{% block header %}
-  <h2>{{ topic }}</h2>
-    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
-    <a href="{% url 'learning_logs:table' %}">返回团员预览</a>
-{% endblock header %}
+            /*background-image: url(./lyoa2/learning_logs/static/learning_logs/img/affirm.png);*/
+        }
+        img {
+            height: 200px;
+            width: 200px;
+        }
+        
+        #divh3 {
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 41px;
+            left: 359px;
+        }
+        
+        #divh1 {
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 21px;
+            left: 70px;
+        }
+        
+        #divhtext {
+            height: 60px;
+            width: 650px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 71px;
+            left: 9px;
+        }
+        /* 表格边框变成细线 */
+        
+        table {
+            border-collapse: collapse;
+        }
+        /*td和th内容居中*/
+        
+        td {
+            text-align: center;
+        }
+        
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
 
-{% block content %}
+<body>
 
-            <table border=1px>
-        <tr>
+    <div id="div_b">
+        <div id="div6">
+            <img src="./lyoa2/learning_logs/static/learning_logs/img/affirm.png">
+        </div>
+        <h1 id="divh1">&nbsp;翥翔之旅</h1>
+        <div>
+            <h3 id="divh3">贵宾参团确认书及账单</h3>
+        </div>
+        <div id="divhtext">
+            <p>TO:<input>T/F:</p>
+            <p>FORM:&nbsp;&nbsp; 翥翔之旅&nbsp; &nbsp; /F:024-82398828</p>
+            <P>贵社<input type="text" size="1">位客人参加我社组织的<span>"{{ tables }}"</span>旅行团，</P>
+            <p>名单已传至我社，我社会按贵社要求操作，敬请放心！</p>
+        </div>
+        <div id="div1">
+            <table border="1">
+                <tr>
+                    <th width="66">序号</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                </tr>
+            </table>
+        </div>
+        <div id="div2">
+            <table border="1">
+                <tr>
+                    <th width="66">姓名</th>
+                    <th width="66">年龄</th>
+                    <th width="130">预报来源</th>
+                    <th width="66">铺位</th>
+                </tr>
+                {% for entry in entries %}
+                <tr>
+                    <td>{{entry.name}}</td>
+                    <td>60</td>
+                    <td>{{entry.signup}}</td>
+                    <td>{{entry.bunk}}</td>
+                {% endfor %}
+                </tr>
+            </table>
+        </div>
+        <div id="div3">
+            <table border="1">
+                <tr>
+                    <th width="258">明细</th>
+                </tr>
+            </table>
+        </div>
+        <div id="divtopic">
+            <p>{{ tables.text }}</p>
+        </div>
+        <div id="div4">
+            <table border="1">
+                <tr>
+                    <td>合计汇款金额</td>
+                    <td><input type="hidden"></td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <p>由于是独立成团，如有不成团情况，提前7天告知，请收客时提前告知客人，谢谢配合！</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">请贵社务必于<input type="text" size="1">月<input type="text" size="1">日16:00之前将团款以汇款形式结清，并将汇款底单传真至我社， 具体行程以出团通知为准！逾期结款，视为自动退团，我社不予正常操作！恳请您在百忙之中予以合作，顺祝商祺！
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="div5">
+        <P id="p1">联系电话（Tel）：024-31032255&nbsp;024-31035522&nbsp;&nbsp;FAX：024-82398828</P>
+        <p id="p1">沈阳翥翔旅行社有限公司&nbsp;&nbsp;&nbsp;地址：沈阳市和平区南京北街21号远东大厦303室</p>
+    </div>
+</body>
 
-            <th>姓名</th>
-            <th>团队名称</th>
-            <th>星期二</th>
-            <th>星期三</th>
-            <th>星期四</th>
-            <th>星期五</th>
-            <th>星期六</th>
-            <th>星期日</th>
-            <th>操作</th>
-        </tr>
-
-            {% for entry in entries %}
-        <tr>
-            <td>{{entry.name}}</td>
-            <td>{{entry.date_added}}</td>
-            <td>{{entry.signup}}</td>
-            <td>{{entry.sex}}</td>
-            <td>{{entry.number}}</td>
-            <td>{{entry.phone}}</td>
-            <td>{{entry.bunk}}</td>
-            <td>{{entry.money}}</td>
-            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
-              编辑</a></td>
-        {% empty %}
-                没有更多的人了
-        {% endfor %}
-        </tr>
-        </table>
-
-
-
-
-{% endblock content %}
+</html>

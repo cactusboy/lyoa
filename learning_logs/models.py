@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Topic(models.Model):
     """旅行团的设置"""
     tour_name = models.CharField('旅行团名称', max_length=100)
-    text = models.TextField('旅行团简介')
+    text = models.TextField('旅行团备注')
     route1 = models.CharField('行程1', max_length=500, null=True)
     route2 = models.CharField('行程2', max_length=500, null=True)
     route3 = models.CharField('行程3', max_length=500, null=True)

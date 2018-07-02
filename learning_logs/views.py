@@ -61,7 +61,7 @@ def table1(request, topic_id):
         raise Http404
     entries1 = tables.entry_set.order_by('-date_added')
 
-    context = {'tables': topic, 'entries': entries1}
+    context = {'tables': tables, 'entries': entries1}
     return render(request, 'learning_logs/table1.html', context)
 
 

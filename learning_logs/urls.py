@@ -14,9 +14,11 @@ urlpatterns = [
     path('edit_entry/<int:entry_id>/', views.edit_entry, name='edit_entry'),
     path('main/', views.main, name='main'),
     path('main/nav.html', views.nav, name='nav'),
+    # 复制topics内容,用来做确认书
     path('main/table/', views.topics_table, name='table'),
     path('main/preview.html', views.preview, name='preview'),
     path('test/', views.test, name='test'),
     path('main/topics.html', views.topicsmain, name='topicsmian'),
+    # table/id用来做确认书
     path('main/table/<int:topic_id>/', views.table1, name='table1'),
 ]
