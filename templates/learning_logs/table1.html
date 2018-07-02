@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>test2</title>
+    <script type="text/javascript" src="{% static 'learning_logs/js/jquery.js' %}"></script>
+    <title>确认书</title>
+    <!--筛选-->
+    <script>
+        $(function() {
+            $("tr.parent").click(function() {
+                $(this)
+                    .siblings('.child_' + this.id).toggle();
+            });
+            $("tr.parent").addClass("selected");
+            $("#searchbox").keyup(function() {
+                $("table tbody tr").hide()
+                    .filter(":contains('" + ($(this).val()) + "')").show(); //filter和contains共同来实现了这个功能。
+            }).keyup();
+        });
+    </script>
     <style>
         #p1 {
             text-align: center;
@@ -129,6 +145,7 @@
         
         td {
             text-align: center;
+            height: 25px;
         }
         
         th {
@@ -141,14 +158,14 @@
 
     <div id="div_b">
         <div id="div6">
-            <img src="./lyoa2/learning_logs/static/learning_logs/img/affirm.png">
+            <img src="{% static 'learning_logs/img/affirm.png' %}">
         </div>
         <h1 id="divh1">&nbsp;翥翔之旅</h1>
         <div>
             <h3 id="divh3">贵宾参团确认书及账单</h3>
         </div>
         <div id="divhtext">
-            <p>TO:<input>T/F:</p>
+            <p>TO:<input type="text" id="searchbox">T/F:</p>
             <p>FORM:&nbsp;&nbsp; 翥翔之旅&nbsp; &nbsp; /F:024-82398828</p>
             <P>贵社<input type="text" size="1">位客人参加我社组织的<span>"{{ tables }}"</span>旅行团，</P>
             <p>名单已传至我社，我社会按贵社要求操作，敬请放心！</p>
@@ -191,26 +208,21 @@
                 <tr>
                     <td>11</td>
                 </tr>
-                <tr>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                </tr>
             </table>
         </div>
         <div id="div2">
             <table border="1">
-                <tr>
+
+                <tr class="parent" id="row_01">
                     <th width="66">姓名</th>
-                    <th width="66">年龄</th>
+                    <th width="66">金额</th>
                     <th width="130">预报来源</th>
                     <th width="66">铺位</th>
                 </tr>
                 {% for entry in entries %}
-                <tr>
+                <tr class="child_row_01">
                     <td>{{entry.name}}</td>
-                    <td>60</td>
+                    <td>{{ entry.money }}</td>
                     <td>{{entry.signup}}</td>
                     <td>{{entry.bunk}}</td>
                 {% endfor %}
