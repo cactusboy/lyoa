@@ -21,4 +21,5 @@ urlpatterns = [
     path('main/topics.html', views.topicsmain, name='topicsmian'),
     # table/id用来做确认书
     path('main/table/<int:topic_id>/', views.table1, name='table1'),
+
 ]

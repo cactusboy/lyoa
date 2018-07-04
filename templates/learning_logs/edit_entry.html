@@ -1,5 +1,4 @@
 
-
 {% block content%}
 
     <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
@@ -11,4 +10,5 @@
         {{ form.as_p }}
         <button name="submit">保存</button>
     </form>
+
 {% endblock content%}

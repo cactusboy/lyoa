@@ -1,47 +1,115 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /* border: 1px solid #000099;*/
+            width: 1500px;
+            height: 800px;
+        }
 
+        /* 表格边框变成细线 */
+        table {
+            border-collapse: collapse;
+        }
 
+        /*td和th内容居中*/
+        tr {
+            height: 40px;
+        }
+
+        td {
+
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        #tr1 {
+            background-color: #e9e7e5;
+        }
+    </style>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        ul:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        li {
+            width: 150px;
+            height: 30px;
+            /* background-color: #bde9fb;
+            font-size: 20px; */
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+</head>
 {% block header %}
-  <h2>{{ topic }}</h2>
-    <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
-    <a href="{% url 'learning_logs:table' %}">返回团员预览</a>
+    <h2 style="height: 80px">{{ topic }}</h2>
+
 {% endblock header %}
 
 {% block content %}
-  <p>
-    <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新旅行者</a>
-  </p>
-            <table border=1px>
-        <tr>
-
-            <th>姓名</th>
-            <th>星期一</th>
-            <th>星期二</th>
-            <th>星期三</th>
-            <th>星期四</th>
-            <th>星期五</th>
-            <th>星期六</th>
-            <th>星期日</th>
-            <th>操作</th>
-        </tr>
+    <div style="height: 80px">
+    <ul>
+    <li>
+            <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
+        </li>
+    <li>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新旅行者</a>
+    </li>
+</ul>
+    </div>
+    <div id="div_b">
+        <table border=1px>
+            <tr id="tr1">
+                <th style="width: 100px;">姓名</th>
+                <th style="width: 60px;">性别</th>
+                <th style="width: 200px;">身份证号</th>
+                <th style="width: 150px;">联系电话</th>
+                <th style="width: 250px;">预报来源</th>
+                <th style="width: 60px;">铺位</th>
+                <th style="width: 100px;">结款</th>
+                <th style="width: 400px;">备注</th>
+                <th style="width: 150px;">操作</th>
+            </tr>
 
             {% for entry in entries %}
-        <tr>
-            <td>{{entry.name}}</td>
-            <td>{{entry.date_added}}</td>
-            <td>{{entry.signup}}</td>
-            <td>{{entry.sex}}</td>
-            <td>{{entry.number}}</td>
-            <td>{{entry.phone}}</td>
-            <td>{{entry.bunk}}</td>
-            <td>{{entry.money}}</td>
-            <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
-              编辑</a></td>
-        {% empty %}
+                <tr>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.sex }}</td>
+                <td>{{ entry.number }}</td>
+                <td>{{ entry.phone }}</td>
+                <td>{{ entry.signup }}</td>
+                <td>{{ entry.bunk }}</td>
+                <td>{{ entry.money }}</td>
+                <td>备注</td>
+                <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+                    编辑</a></td>
+            {% empty %}
                 没有更多的人了
-        {% endfor %}
-        </tr>
+            {% endfor %}
+            </tr>
         </table>
-
+    </div>
 
 
 

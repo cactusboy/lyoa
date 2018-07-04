@@ -58,7 +58,7 @@ class Entry(models.Model):
     # 铺位
     bunk = models.CharField('铺位', max_length=4, choices=bed_choices, default='上铺')
     # 结款
-    money = models.DecimalField('结款', max_digits=5, decimal_places=2)
+    money = models.DecimalField('结款', max_digits=8, decimal_places=2)
 
     class Meta(object):
         verbose_name_plural = '参团人员'
