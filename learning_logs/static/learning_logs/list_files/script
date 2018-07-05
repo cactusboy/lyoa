@@ -1,0 +1,21 @@
+document.write("<script src='https://pstat.youzu.com/uuzu/js/fingerprint.js'></script>");
+//<script>
+    $(function () {
+        // 游族统计
+        var _hmt = _hmt || [];
+        var hm = document.createElement("script");
+        var src = 'https://pstat.youzu.com/dp/script/js';
+        //src += '?id='+idvisitor
+        hm.src = src
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        //搜索引擎行为统计
+        var se_idvisitor = new Fingerprint().get();
+        var se_hm = document.createElement("script");
+        var se_src = 'https://pstat.youzu.com/search-engine/script/js'
+        se_src += '?id='+se_idvisitor
+        se_hm.src = se_src
+        var se_s = document.getElementsByTagName("script")[0];
+        se_s.parentNode.insertBefore(se_hm, se_s);
+    });
+//</script>

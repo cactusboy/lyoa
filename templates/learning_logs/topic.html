@@ -74,7 +74,7 @@
             <a href="{% url 'learning_logs:topics' %}">返回我的旅行团</a>
         </li>
     <li>
-        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新旅行者</a>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新团员</a>
     </li>
 </ul>
     </div>
@@ -103,7 +103,10 @@
                 <td>{{ entry.money }}</td>
                 <td>备注</td>
                 <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
-                    编辑</a></td>
+                    编辑</a>
+                <a href=#>删除</a>
+                </td>
+
             {% empty %}
                 没有更多的人了
             {% endfor %}

@@ -3,10 +3,10 @@
 from django.urls import path
 from . import views
 
-app_name = 'learning_logs'                  # 取代namespace
+app_name = 'learning_logs'  # 取代namespace
 urlpatterns = [
     # 主页
-    path('', views.index, name='index'),     # url()改为path()， 不需要正则表达式了
+    path('', views.index, name='index'),  # url()改为path()， 不需要正则表达式了
     path('topics/', views.topics, name='topics'),
     path('topics/<int:topic_id>/', views.topic, name='topic'),
     path('main/new_topic.html', views.new_topic, name='new_topic'),
@@ -21,5 +21,6 @@ urlpatterns = [
     path('main/topics.html', views.topicsmain, name='topicsmian'),
     # table/id用来做确认书
     path('main/table/<int:topic_id>/', views.table1, name='table1'),
-
+    # 删除数据
+    # path('topics/<int:topic_id>/', views.topic_del, name='del'),
 ]

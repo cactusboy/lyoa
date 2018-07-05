@@ -108,8 +108,8 @@
                 <p class="tips">如果是请点击“确定”，否则点“取消”</p>
 
                 <div class="buttons">
+                    <!--在js里设置确定退出到（window.location.href = "/";）其中"/"就是退出到主页-->
                     <input type="button" class="button long2 ok " value="确定" />
-                    <!--<a class="long2" href="{% url 'users:logout' %}">确定</a>-->
                     <input type="button" class="button long2 normal" value="取消" />
                 </div>
             </div>
@@ -199,7 +199,7 @@
     $('.exitDialog input[type=button]').click(function(e) {
         $('.exitDialog').Dialog('close');
         if ($(this).hasClass('ok')) {
-            window.location.href = "login.html";
+            window.location.href = "/";
         }
     });
     (function() {

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from .models import Topic, Entry
@@ -150,3 +150,17 @@ def test(request):
 def topicsmain(request):
     """mian里面的topics"""
     return render(request, 'learning_logs/topics.html')
+
+
+'''
+# 删除数据
+def topic_del(request):
+    errors = []
+    if 'id' in request.GET:
+        bid_ = request.GET['id']
+        Entry.objects.filter(id=bid_).delete()
+        return HttpResponseRedirect(reverse('learning_logs:topic'))
+    else:
+        errors.append("参数异常请刷新后重试")
+        return render_to_response('test.html', {'errors': errors})
+'''
