@@ -1,0 +1,107 @@
+.table-a {
+    border: solid 1px #666;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.row-a {
+    height: 30px;
+    border-bottom: solid 1px #666;
+    text-align: center;
+}
+
+.row-b {
+    height: 320px;
+    border-bottom: solid 1px #666;
+}
+
+.row-c {
+    height: 50px;
+    border-bottom: solid 1px #666;
+    line-height: 22px;
+}
+
+.row-d {
+    overflow: hidden;
+    height: 50px;
+    border-bottom: solid 1px #666;
+    line-height: 22px;
+}
+
+.row-e {
+    overflow: hidden;
+    height: 70px;
+    border-bottom: solid 1px #666;
+    padding: 5px;
+    line-height: 22px;
+}
+
+.line-a {
+    float: left;
+    width: 60%;
+}
+
+.line-b {
+    float: left;
+    width: 40%;
+}
+
+.line-c {
+    float: left;
+    width: 15%;
+    height: 100%;
+    text-align: center;
+}
+
+.line-d {
+    float: left;
+    width: 85%;
+}
+
+.cell-a {
+    float: left;
+    width: 20%;
+}
+
+.cell-b {
+    float: left;
+    width: 20%;
+}
+
+.cell-c {
+    float: left;
+    width: 20%;
+}
+
+.cell-d {
+    float: left;
+    width: 20%;
+}
+
+.cell-e {
+    float: left;
+    width: 20%;
+}
+
+.cel {
+    display: block;
+    border-right: solid 1px #666;
+}
+
+.row-b .line-a {
+    height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.table-data {
+    height: 100%;
+    border-right: solid 1px #666;
+}
+
+.table-data .row {
+    height: 30px;
+    margin-right: -1px;
+    border-bottom: solid 1px #666;
+    text-align: center;
+}
