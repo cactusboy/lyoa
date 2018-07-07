@@ -32,7 +32,11 @@
             <ul class="clearfix">
                 {% for topic in topics %}
                     <li>
-                        <h3 style="text-align: center;"><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h3>
+                    <!--获取旅行团图片-->
+                    <a href="{% url 'learning_logs:topic' topic.id %}">
+                    <img src="{{ topic.img.url }}">
+                        <h3 style="text-align: center;">{{ topic }}</h3>
+                    </a>
                     </li>
                 {% endfor %}
             </ul>

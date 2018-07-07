@@ -6,14 +6,16 @@ from django.contrib.auth.models import User
 class Topic(models.Model):
     """旅行团的设置"""
     tour_name = models.CharField('旅行团名称', max_length=100)
-    text = models.TextField('旅行团备注')
-    route1 = models.CharField('行程1', max_length=500, null=True)
-    route2 = models.CharField('行程2', max_length=500, null=True)
-    route3 = models.CharField('行程3', max_length=500, null=True)
-    route4 = models.CharField('行程4', max_length=500, null=True)
-    route5 = models.CharField('行程5', max_length=500, null=True)
+    text = models.CharField('旅行团备注', max_length=200, null=True)
+    route1 = models.CharField('行程1', max_length=200, null=True)
+    route2 = models.CharField('行程2', max_length=200, null=True)
+    route3 = models.CharField('行程3', max_length=200, null=True)
+    route4 = models.CharField('行程4', max_length=200, null=True)
+    route5 = models.CharField('行程5', max_length=200, null=True)
     date_added = models.DateField('建立时间', auto_now_add=True)
     date_start = models.DateField('出发日期')
+    img = models.ImageField('图片', upload_to='img', max_length=200)
+    img_name = models.CharField('图片名称', max_length=20)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
