@@ -96,7 +96,7 @@
     <div id="divhtext">
         <p>TO:<input type="text" oninput="search(this.value)"/>T/F:</p>
         <p>FORM:&nbsp;&nbsp; 翥翔之旅&nbsp; &nbsp; /F:024-82398828</p>
-        <P>贵社<label id="TOTAL_DATA"></label>参加我社组织的<span>"{{ tables }}"</span>旅行团，</P>
+        <P>贵社<label id="TOTAL_DATA"></label>参加我社组织的<span>{{ tables.date_start|date:'M d' }}日</span><span>"{{ tables }}"</span>旅行团，</P>
         <p>名单已传至我社，我社会按贵社要求操作，敬请放心！</p>
     </div>
     <!-- 表格的样式及定义-->

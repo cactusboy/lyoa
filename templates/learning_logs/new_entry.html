@@ -1,15 +1,30 @@
+{% load bootstrap3 %}
+<head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /*border: 1px solid #000099;*/
+            width: 700px;
+            height: 800px;
+        }
+    </style>
+</head>
 
-
-{% block content%}
-
+{% block content %}
+<div id="div_b">
     <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-
 
     <p>添加新团员:</p>
 
     <form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">添加成员</button>
+
+        {% bootstrap_form form %}
+        <button name="submit" class="btn btn-primary">添加成员</button>
     </form>
-{% endblock content%}
+</div>
+{% endblock content %}

@@ -45,7 +45,6 @@ class Entry(models.Model):
     # 外键，一对多关系，on_delete=models.CASCADE是级联删除，verbose_name是显示的名称
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, verbose_name='旅行团名称')
     # TypeError: __init__() missing 1 required positional argument: 'on_delete'
-    text = models.TextField('备注')
     date_added = models.DateField('入团时间', auto_now_add=True)
     # 参团人姓名
     name = models.CharField('参团人姓名', max_length=50)
@@ -61,6 +60,7 @@ class Entry(models.Model):
     bunk = models.CharField('铺位', max_length=4, choices=bed_choices, default='上铺')
     # 结款
     money = models.DecimalField('结款', max_digits=8, decimal_places=2)
+    text = models.TextField('备注')
 
     class Meta(object):
         verbose_name_plural = '参团人员'

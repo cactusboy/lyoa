@@ -1,23 +1,34 @@
+<head>
+    <style>
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /*border: 1px solid #000099;*/
+            width: 700px;
+            height: 800px;
+        }
+    </style>
+</head>
 
 
-{% block header %}
-  <h2>请选择需要同行确认书的旅行团</h2>
-{% endblock %}
+
 
 {% block content %}
-
-  <ul>
-    {% for topic in topics %}
-      <li>
-        <h3>
-          <a href="{% url 'learning_logs:table1' topic.id %}">{{ topic }}</a>
-        </h3>
-      </li>
-    {% empty %}
-      <li>目前没有旅行团</li>
-    {% endfor %}
-  </ul>
-
-  <h3><a href="{% url 'learning_logs:new_topic' %}">添加新旅行团</h3>
+    <div id="div_b">
+        <h2>请选择需要同行确认书的旅行团</h2>
+        <ul>
+            {% for topic in topics %}
+                <li>
+                    <h3>
+                        <a href="{% url 'learning_logs:table1' topic.id %}">{{ topic }}</a>
+                    </h3>
+                </li>
+            {% empty %}
+                <li>目前没有旅行团</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h3><a href="{% url 'learning_logs:new_topic' %}">添加新旅行团</h3>
 
 {% endblock content %}

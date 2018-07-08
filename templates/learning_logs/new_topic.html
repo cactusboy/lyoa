@@ -1,25 +1,33 @@
-
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 <head>
-        {% bootstrap_css %}
+    {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <style>
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /*border: 1px solid #000099;*/
+            width: 700px;
+            height: 800px;
+        }
+    </style>
 </head>
 {% block header %}
-  <h2>添加新旅行团:</h2>
+    <h2>添加新旅行团:</h2>
 {% endblock header %}
 
 {% block content %}
+    <div id="div_b">
+        <form action="{% url 'learning_logs:new_topic' %}" method='post' class="form col-md-6">
 
-  <form action="{% url 'learning_logs:new_topic' %}" method='post'
-      class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
 
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    
-    {% buttons %}
-      <button name="submit" class="btn btn-primary">添加旅行团</button>
-    {% endbuttons %}
-    
-  </form>
-    
+            {% buttons %}
+                <button name="submit" class="btn btn-primary">添加旅行团</button>
+            {% endbuttons %}
+
+        </form>
+    </div>
 {% endblock content %}
