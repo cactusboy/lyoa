@@ -1,14 +1,28 @@
 {% load bootstrap3 %}
-{% block content%}
-
-    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+<head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /*border: 1px solid #000099;*/
+            width: 700px;
+            height: 800px;
+        }
+    </style>
+</head>
+{% block content %}
+<div id="div_b">
+    <a href="{% url 'learning_logs:topic' topic.id %}"><h2>{{ topic }}</h2></a>
 
     <p>编辑旅行者:</p>
     <!-- 如果把下面的edit_entry改成new_entry会怎么样 -->
-    <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post"> 
+    <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">保存</button>
+        {% bootstrap_form form %}
+        <button name="submit" class="btn btn-primary">保存</button>
     </form>
-
-{% endblock content%}
+</div>
+{% endblock content %}

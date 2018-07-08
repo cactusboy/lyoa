@@ -6,16 +6,16 @@ from django.contrib.auth.models import User
 class Topic(models.Model):
     """旅行团的设置"""
     tour_name = models.CharField('旅行团名称', max_length=100)
-    text = models.CharField('旅行团备注', max_length=200, null=True)
-    route1 = models.CharField('行程1', max_length=200, null=True)
-    route2 = models.CharField('行程2', max_length=200, null=True)
-    route3 = models.CharField('行程3', max_length=200, null=True)
-    route4 = models.CharField('行程4', max_length=200, null=True)
-    route5 = models.CharField('行程5', max_length=200, null=True)
+    route1 = models.CharField('行程1', max_length=200, null=True, blank=True)
+    route2 = models.CharField('行程2', max_length=200, null=True, blank=True)
+    route3 = models.CharField('行程3', max_length=200, null=True, blank=True)
+    route4 = models.CharField('行程4', max_length=200, null=True, blank=True)
+    route5 = models.CharField('行程5', max_length=200, null=True, blank=True)
     date_added = models.DateField('建立时间', auto_now_add=True)
     date_start = models.DateField('出发日期')
     img = models.ImageField('图片', upload_to='img', max_length=200)
     img_name = models.CharField('图片名称', max_length=20)
+    text = models.CharField('旅行团备注', max_length=200, null=True, blank=True, default="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -24,9 +24,9 @@ class Topic(models.Model):
 
     # 定义Topic模型的显示名字
     class Meta:
-        verbose_name = '旅行团名称'
+        verbose_name = '旅行团'
         # 模型的复数形式
-        verbose_name_plural = '旅行团名称'
+        verbose_name_plural = '旅行团'
 
 
 class Entry(models.Model):
@@ -55,12 +55,12 @@ class Entry(models.Model):
     # 身份证号
     number = models.CharField('身份证号', max_length=18)
     # 联系电话
-    phone = models.CharField('联系电话', max_length=11)
+    phone = models.CharField('联系电话', max_length=12)
     # 铺位
     bunk = models.CharField('铺位', max_length=4, choices=bed_choices, default='上铺')
     # 结款
     money = models.DecimalField('结款', max_digits=8, decimal_places=2)
-    text = models.TextField('备注')
+    text = models.CharField('个人备注', max_length=100, null=True, blank=True, default="无")
 
     class Meta(object):
         verbose_name_plural = '参团人员'
