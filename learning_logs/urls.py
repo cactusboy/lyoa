@@ -8,6 +8,10 @@ urlpatterns = [
     # 主页
     path('', views.index, name='index'),  # url()改为path()， 不需要正则表达式了
     path('topics/', views.topics, name='topics'),
+    # 导游交团文档预览页
+    path('tour_doc/', views.tour_doc, name='tour_doc'),
+    # 导游交团文档明细页
+    path('tour_doc/<int:topic_id>/', views.table1, name='table1'),
     path('topics/<int:topic_id>/', views.topic, name='topic'),
     path('main/new_topic.html', views.new_topic, name='new_topic'),
     path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),

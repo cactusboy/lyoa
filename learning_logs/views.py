@@ -19,8 +19,18 @@ def topics(request):
     return render(request, 'learning_logs/topics.html', context)
 
 
+# 同行确认列表页
 @login_required
 def topics_table(request):
+    """显示所有的旅行团"""
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    context = {'topics': topics}
+    return render(request, 'learning_logs/table.html', context)
+
+
+# 导游交团列表页
+@login_required
+def tour_doc(request):
     """显示所有的旅行团"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
@@ -51,7 +61,7 @@ def table(request):
 # 与topic一样性质的table_view，用来形成确认书
 @login_required
 def table1(request, topic_id):
-    """显示单个主题及其所有的条目"""
+    """生成同行确认书"""
     # 向数据库进行查询
     tables = Topic.objects.get(id=topic_id)
     # topic = get_object_or_404(Topic, id = topic_id)   可代替，若不存在则返回404页面
@@ -63,6 +73,23 @@ def table1(request, topic_id):
 
     context = {'tables': tables, 'entries': entries1}
     return render(request, 'learning_logs/table1.html', context)
+
+
+# 导游交团文档
+@login_required
+def tour_docid(request, topic_id):
+    """生成导游交团文档"""
+    # 向数据库进行查询
+    tables = Topic.objects.get(id=topic_id)
+    # topic = get_object_or_404(Topic, id = topic_id)   可代替，若不存在则返回404页面
+
+    # 确保用户无法查看别人的Topic
+    if tables.owner != request.user:
+        raise Http404
+    entries1 = tables.entry_set.order_by('-date_added')
+
+    context = {'tour_doc': tour_doc, 'entries': entries1}
+    return render(request, 'learning_logs/tour_docid.html', context)
 
 
 @login_required
