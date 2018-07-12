@@ -1,0 +1,137 @@
+//<script>
+    function dp_data_push(data_loc_id, data_id, custom, type) {
+
+        var stat_page_load_key = "dp_c3a5acb1bede5196f69256e44ad3e2ba";
+        var stat_in_time_key = "dp_2289deb9c1e0ecfaa1d08bc350af6afc";
+        var idvisitor_key = "dp_e8ebeec8e2b15c87c844a35b7f3d0595";
+        //获得浏览器分辨率
+        var width = $(window).width() //浏览器当前窗口可视区域宽度
+        var height = $(window).height()//浏览器当前窗口可视区域高度
+        var page_in_time = $("#"+stat_in_time_key).val();//加载时上报fluent_id
+        var idvisitor = $("#"+idvisitor_key).val();//页面记录的idvisitor;
+
+        var nowurl = document.URL;
+        var fromurl = document.referrer;
+
+        var page_title=document.title;
+        var data = {
+            data_loc_id: data_loc_id,
+            data_id: data_id,
+            custom: custom,
+            event: type,
+            width: width,
+            height: height,
+            now_url: nowurl,
+            from_url: fromurl,
+            page_in_time: page_in_time,
+            idvisitor: idvisitor,
+            title:page_title
+        }
+        var userAgent = navigator.userAgent.toLowerCase();
+        var push_url = 'https://pstat.youzu.com/dp/push';
+        if (userAgent.indexOf("msie") > -1) { //IE
+            $.ajax({
+                url: push_url,
+                crossDomain: true,
+                type: 'POST',
+                dataType: "jsonp",
+                data: data,
+                success: function (data) {
+                    if(type == "open" && data && data.idvisitor){
+                        $("#"+ idvisitor_key).val(data.idvisitor);//续写idvisitor
+                    }
+                }
+            });
+        } else { //FireFox Chrome
+            $.ajax({
+                url: push_url,
+                type: 'POST',
+                dataType: "jsonp",
+                data: data,
+                success: function (data) {
+                    if(type == "open" && data && data.idvisitor){
+                        $("#"+ idvisitor_key).val(data.idvisitor);//续写idvisitor
+                    }
+                }
+            });
+        }
+
+        return 1;
+    }
+
+    $(function () {
+        $("html").append("<input type='hidden' id='dp_2289deb9c1e0ecfaa1d08bc350af6afc' value='1530330542' />");
+        $("html").append("<input type='hidden' id='dp_c3a5acb1bede5196f69256e44ad3e2ba' value='0' />");
+        $("html").append("<input type='hidden' id='dp_e8ebeec8e2b15c87c844a35b7f3d0595' value='8fa769a236947ee8555888679e1322d3' />");
+
+        dp_data_push('', '', '', 'open');//页面加载完成后在做有可能数据库交互的操作 以免影响业务加载
+
+        if(typeof(data_push_js_call_back) == "function" ){
+            data_push_js_call_back();
+        }
+
+        window.onbeforeunload = function()
+        {
+            //setTimeout(function(){_t = setTimeout(onunloadcancel, 0)}, 0);
+            dp_data_push('', '', '', 'close')
+        }
+
+        $(document).on("click", '[data_loc_id]', function () {
+            var event_type = $(this).attr('event_type')
+            if (typeof(event_type) != 'undefined') {
+                var event_type_arr = event_type.split('-');
+                var in_int = $.inArray("click", event_type_arr);
+                if (in_int != -1) {
+                    var data_loc_id = $(this).attr('data_loc_id')
+                    var data_id = $(this).attr('data_id')
+                    if (typeof(data_id) == 'undefined') {
+                        data_id = ''
+                    }
+                    var custom = $(this).attr('custom')
+                    if (typeof(custom) == 'undefined') {
+                        custom = ''
+                    }
+                    dp_data_push(data_loc_id, data_id, custom, 'click')
+                }
+            }
+        })
+        $(document).on("focus", '[data_loc_id]', function () {
+            var event_type = $(this).attr('event_type')
+            if (typeof(event_type) != 'undefined') {
+                var event_type_arr = event_type.split('-');
+                var in_int = $.inArray("focus", event_type_arr);
+                if (in_int != -1) {
+                    var data_loc_id = $(this).attr('data_loc_id')
+                    var data_id = $(this).attr('data_id')
+                    if (typeof(data_id) == 'undefined') {
+                        data_id = ''
+                    }
+                    var custom = $(this).attr('custom')
+                    if (typeof(custom) == 'undefined') {
+                        custom = ''
+                    }
+                    dp_data_push(data_loc_id, data_id, custom, 'focus')
+                }
+            }
+        })
+        $(document).on("blur", '[data_loc_id]', function () {
+            var event_type = $(this).attr('event_type')
+            if (typeof(event_type) != 'undefined') {
+                var event_type_arr = event_type.split('-');
+                var in_int = $.inArray("blur", event_type_arr);
+                if (in_int != -1) {
+                    var data_loc_id = $(this).attr('data_loc_id')
+                    var data_id = $(this).attr('data_id')
+                    if (typeof(data_id) == 'undefined') {
+                        data_id = ''
+                    }
+                    var custom = $(this).attr('custom')
+                    if (typeof(custom) == 'undefined') {
+                        custom = ''
+                    }
+                    dp_data_push(data_loc_id, data_id, custom, 'blur')
+                }
+            }
+        })
+    });
+    //</script>

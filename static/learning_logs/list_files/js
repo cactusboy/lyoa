@@ -1,0 +1,270 @@
+//<script>
+    //搜索引擎入口访客行为统计
+    function pstatSearchEngine()
+    {
+        //根据属性获取数据
+        this.getDataByAttribute = function(attribute){
+            var tmpLocIds = $('*['+attribute+']');
+            var data = '';
+            if(tmpLocIds.length >= 1){
+                data = $(tmpLocIds[0]).attr(attribute);
+            }
+            return data;
+        };
+        //判断是否为空
+        this.isNull = function(value){
+            if(typeof(value) == 'undefined') return true;
+            if(value == '' || value == 0) return true;
+            return false;
+        };
+        //数组转json对象
+        this.arrayToJson = function(array){
+            var jsonObj={};
+            $(array).each(function(){
+                jsonObj[this.name]=this.value;
+            });
+            return jsonObj;
+        };
+        //获取cookie
+        this.getCookie = function(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        };
+        //获取cookie数据
+        this.getCookieData = function(key){
+            var value = '';
+            if (typeof $.cookie == 'undefined') {
+                value = this.getCookie(key);
+            } else {
+                value = $.cookie(key);
+            }
+            return this.isNull(value) ? false : value;
+        };
+        //获取来源链接
+        this.getFromurl = function()
+        {
+            var fromurl = ''; //来源
+            if (document.referrer.length > 0) {
+                fromurl = document.referrer;
+            }
+            try {
+                if (fromurl.length == 0 && opener.location.href.length > 0) {
+                    fromurl = opener.location.href;
+                }
+            } catch (e) {}
+            return fromurl;
+        };
+        //获取搜索ID
+        this.getSearchVid = function(){
+           return this.getCookieData("pstat_se_c6a2c2375fd4a8546e2eb96a16ca6870");
+        };
+        //获取游戏ID
+        this.getGameId = function(){
+            var game_id = 0;
+            if($('#game_dt_ad_min > a').length >= 1){
+                game_id = $('#game_dt_ad_min > a').attr("data-gameid");
+            } else {
+                game_id = this.getDataByAttribute("data_game_id");
+            }
+            return game_id;
+        };
+        //获取网站打点编号
+        this.getWebLocId = function(web_dadian_id){
+            if(this.isNull(web_dadian_id)){
+                web_dadian_id = this.getDataByAttribute('data_loc_id');
+            }
+            if(!this.isNull(web_dadian_id)) {
+                try {
+                    if (!isNaN(web_dadian_id)) {
+                        //数字
+                        web_dadian_id = web_dadian_id.toString();
+                    }
+                    if (web_dadian_id.length > 4) {
+                        web_dadian_id = web_dadian_id.slice(0, 4);
+                    }
+                } catch (e) {
+                }
+            }
+            return web_dadian_id;
+        };
+        //上报事件
+        this.dataPush = function(game_id, web_dadian_id, type, content)
+        {
+            //获得浏览器分辨率
+            var width = $(window).width() //浏览器当前窗口可视区域宽度
+            var height = $(window).height()//浏览器当前窗口可视区域高度
+            var nowurl = document.URL;
+            var fromurl = this.getFromurl();
+            var idvisitor = new Fingerprint().get();
+            var page_title=document.title;
+            var post_data = {
+                game_id: game_id,
+                web_dadian_id: web_dadian_id,
+                event: type,
+                data: content,
+                width: width,
+                height: height,
+                now_url: nowurl,
+                from_url: fromurl,
+                idvisitor: idvisitor,
+                title: page_title
+            }
+            var userAgent = navigator.userAgent.toLowerCase();
+            var push_url = 'https://pstat.youzu.com/search-engine/push';
+            if (userAgent.indexOf("msie") > -1) { //IE
+                $.ajax({
+                    url: push_url,
+                    crossDomain: true,
+                    type: 'POST',
+                    dataType: "jsonp",
+                    data: post_data,
+                    success: function (data) {
+
+                    }
+                });
+            } else { //FireFox Chrome
+                $.ajax({
+                    url: push_url,
+                    type: 'POST',
+                    dataType: "jsonp",
+                    data: post_data,
+                    success: function (data) {
+
+                    }
+                });
+            }
+        };
+        //监听事件初始化
+        this.eventInit = function(){
+            var se_obj = this;
+            $(function(){
+                $(document).on("click", '[data_type]', function () {
+                    var data_type = $(this).attr('data_type');
+                    var web_dadian_id = $(this).attr('data_loc_id');
+                    if(!se_obj.isNull(data_type)) data_type = data_type.toLowerCase();
+                    var is_push = true; //是否上报
+                    var push_data = ''; //上报主数据
+                    //数据类型
+                    switch(data_type){
+                        case 'download':
+                            //下载
+                            var href = $(this).attr('href');
+                            if(se_obj.isNull(href) || href == 'javascript:;'){
+                                href = $(this).attr('onclick');
+                                if(se_obj.isNull(href) || href=='javascript:;'){
+                                    href = '';
+                                }
+                            }
+                            push_data = href;
+                            break;
+                        case 'register':
+                            //注册点击
+                            if($(this).parents('form').length <= 0){
+                                is_push = false;
+                                break;
+                            }
+                            var formData = $($(this).parents('form')[0]).serializeArray();
+                            formData = se_obj.arrayToJson(formData);
+                            if(typeof(formData) != 'object') {
+                                is_push = false;
+                                break;
+                            }
+                            if(!"ajax_reg" in formData){
+                                is_push = false;
+                                break;
+                            }
+                            if(formData.ajax_reg == 'user-mobile-form'){
+                                //手机号
+                                if("user_account_m" in formData){
+                                    push_data = formData.user_account_m;
+                                }
+                            } else {
+                                if("user_account" in formData){
+                                    push_data = formData.user_account;
+                                }
+                            }
+//                            if(se_obj.isNull(push_data)) is_push = false;
+                            break;
+                        case 'third_party_login':
+                            //第三方登录
+                            var href = $(this).attr('href');
+                            if(se_obj.isNull(href) || href == 'javascript:;'){
+                                href = $(this).attr('onclick');
+                                if(se_obj.isNull(href) || href=='javascript:;'){
+                                    href = '';
+                                }
+                            }
+                            push_data = href;
+                            break;
+                        case 'start_game':
+                            //开始游戏
+                            var href = $(this).attr('href');
+                            if(se_obj.isNull(href) || href == 'javascript:;'){
+                                href = $(this).attr('onclick');
+                                if(se_obj.isNull(href) || href=='javascript:;'){
+                                    href = '';
+                                }
+                            }
+                            push_data = href;
+                            break;
+                        case 'receive_gift':
+                            //领取礼包
+                            var href = $(this).attr('href');
+                            if(se_obj.isNull(href) || href == 'javascript:;'){
+                                href = $(this).attr('onclick');
+                                if(se_obj.isNull(href) || href=='javascript:;'){
+                                    href = '';
+                                }
+                            }
+                            push_data = href;
+                            break;
+                        default:
+                            is_push = false;
+                            break;
+                    }
+                    if(is_push){
+                        se_obj.dataPush(se_obj.getGameId(), se_obj.getWebLocId(web_dadian_id), data_type, push_data);
+                    }
+                });
+            });
+        };
+        //初始化
+        this.init = function()
+        {
+            var fromurl = this.getFromurl();
+            if(this.isNull(fromurl)) fromurl = fromurl.toLowerCase();
+            var searchEngine = new Array('.baidu.');
+            var seTag = false;
+            for(i in searchEngine){
+                if (fromurl.indexOf(searchEngine[i]) > 0){
+                    seTag = true;
+                    break;
+                }
+            }
+            if(!seTag){
+                var searchVid = this.getSearchVid();
+                if(searchVid){
+                    seTag = true;
+                    var registerKey = this.getCookieData("pstat_se_ee58d5c512722d8b6f4049c0d615573e");
+                    if(registerKey){
+                        //上报注册成功事件
+                        this.dataPush(this.getGameId(), this.getWebLocId(''), 'register_success', '');
+                    }
+                }
+            } else {
+                //搜索引擎来源入口
+                this.dataPush(this.getGameId(), this.getWebLocId(''), 'open', '');
+            }
+            if(seTag){
+                //监听事件
+                this.eventInit();
+            }
+        }
+    }
+    var pstatSearchEngine = new pstatSearchEngine();
+    pstatSearchEngine.init();
+    //</script>
