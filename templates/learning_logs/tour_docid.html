@@ -89,11 +89,16 @@
         }
 
     </style>
+    <style type="text/css" media="print">
+        .noprint {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 <div id="div_b">
-<!--
+    <!--
     <div id="div6">
         <img src="{% static 'learning_logs/img/affirm.png' %}">
     </div>
@@ -155,7 +160,7 @@
             </div>
         </div>
     </div>
-
+    <input type="button" name="button" id="button" class="noprint" value="打印当前页" onclick="printpage()"/>
 
     <!--把数据动态输出到这里-->
     <table id="SOURCE_DATA" style="display:none;">
@@ -170,6 +175,10 @@
     </table>
 
     <script>
+        function printpage() {
+            window.print();
+        }
+
         // 数据源(将table转换成数组)
         var tableData = (function () {
             var arr = [];
