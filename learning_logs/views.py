@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, render_to_response
+from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from .models import Topic, Entry
@@ -34,7 +34,7 @@ def tour_doc(request):
     """显示所有的旅行团"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
-    return render(request, 'learning_logs/table.html', context)
+    return render(request, 'learning_logs/tour_doc.html', context)
 
 
 @login_required
@@ -179,15 +179,9 @@ def topicsmain(request):
     return render(request, 'learning_logs/topics.html')
 
 
-'''
-# 删除数据
-def topic_del(request):
-    errors = []
-    if 'id' in request.GET:
-        bid_ = request.GET['id']
-        Entry.objects.filter(id=bid_).delete()
-        return HttpResponseRedirect(reverse('learning_logs:topic'))
-    else:
-        errors.append("参数异常请刷新后重试")
-        return render_to_response('test.html', {'errors': errors})
-'''
+def entry_del(request):
+    """删除数据"""
+    nid = request.GET.get('nid')
+    Entry.objects.filter(id=nid).delete()
+    return redirect('learning_logs/topic.html')
+    # return render(request, 'learning_logs/topic.html')

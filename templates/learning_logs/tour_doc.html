@@ -16,12 +16,12 @@
 
 {% block content %}
     <div id="div_b">
-        <h2>请选择需要同行确认书的旅行团</h2>
+        <h2>导游交团团档</h2>
         <ul>
             {% for topic in topics %}
                 <li>
                     <h3>
-                        <a href="{% url 'learning_logs:table1' topic.id %}">{{ topic }}</a>
+                        <a href="{% url 'learning_logs:tour_docid' topic.id %}">{{ topic }}</a>
                     </h3>
                 </li>
             {% empty %}

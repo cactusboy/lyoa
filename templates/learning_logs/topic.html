@@ -104,7 +104,7 @@
                 <td>{{ entry.text }}</td>
                 <td><a href="{% url 'learning_logs:edit_entry' entry.id %}">
                     编辑</a>
-                <a href=#>删除</a>
+                <!--<a href="/entry_del/?nid={{ entry.id }}">删除</a>-->
                 </td>
 
             {% empty %}

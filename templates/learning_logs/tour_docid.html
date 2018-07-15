@@ -1,23 +1,246 @@
-{% extends "base.html" %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>导游交团文档</title>
+    <link rel="stylesheet" href="{% static 'learning_logs/css/style_tour.css' %}"/>
+    <style>
+        #p1 {
+            text-align: center;
+        }
 
-{% block header %}
-  <h1>Topics</h1>
-{% endblock %}
+        #div_b {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            border: 1px solid #000099;
+            width: 900px;
+            height: 1000px;
+        }
 
-{% block content %}
+        #div1 {
+            /*border: 1px solid #000099;
+            height: 200px;
+            width: 60px;*/
+            margin: 2px;
+            position: absolute;
+            top: 100px;
+            left: 38px;
+        }
 
-  <ul>
-    {% for topic in topics %}
-      <li>
-        <h3>
-          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-        </h3>
-      </li>
-    {% empty %}
-      <li>目前没有旅行团</li>
-    {% endfor %}
-  </ul>
-  
-  <h3><a href="{% url 'learning_logs:new_topic' %}">添加新旅行团</h3>
+        #div5 {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            bottom: 0;
+        }
 
-{% endblock content %}
+        #div6 {
+            top: 470px;
+            left: 430px;
+            height: 200px;
+            width: 200px;
+            margin: 2px;
+            position: relative;
+            /*background-image: url(./lyoa2/learning_logs/static/learning_logs/img/affirm.png);*/
+        }
+
+        img {
+            height: 200px;
+            width: 200px;
+        }
+
+        #divh3 {
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 41px;
+            left: 359px;
+        }
+
+        #divh1 {
+            height: 60px;
+            width: 200px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 21px;
+            left: 70px;
+        }
+
+        #divhtext {
+            height: 60px;
+            width: 650px;
+            margin: 2px;
+            /* 下面的样式是把div2放到div的右边relative是相对定位，会保留原来的位置，absolute是决定定位，不保留原来的位置*/
+            position: absolute;
+            top: 71px;
+            left: 9px;
+        }
+
+        #input1 {
+            width: 208px;
+            height: 170px;
+            text-align: left;
+            border: 0px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="div_b">
+<!--
+    <div id="div6">
+        <img src="{% static 'learning_logs/img/affirm.png' %}">
+    </div>
+    -->
+    <h1 id="divh1">&nbsp;翥翔之旅</h1>
+    <div>
+        <h3 id="divh3">导游交团团档</h3>
+    </div>
+    <div id="divhtext">
+        <!--
+        <p>TO:<input type="text" oninput="search(this.value)"/>T/F:</p>
+
+        <p>FORM:&nbsp;&nbsp; 翥翔之旅&nbsp; &nbsp; /F:024-82398828</p>
+        <P>贵社<label id="TOTAL_DATA"></label>参加我社组织的<span>{{ tables.date_start|date:'M d' }}日</span><span>"{{ tables }}"</span>旅行团，</P>
+        <p>名单已传至我社，我社会按贵社要求操作，敬请放心！</p>
+        -->
+    </div>
+    <!-- 表格的样式及定义-->
+
+    <div id="div1">
+        <div class="table-a" style="width:800px;height:895px;margin-left: auto;margin-right: auto;">
+            <div class="row-a">
+                <div class="line-a">
+                    <div class="cell-a"><span class="cel">序号</span></div>
+                    <div class="cell-b"><span class="cel">姓名</span></div>
+                    <div class="cell-c"><span class="cel">身份证号</span></div>
+                    <div class="cell-d"><span class="cel">联系电话</span></div>
+                    <div class="cell-e"><span class="cel">铺位</span></div>
+                </div>
+                <div class="line-b">明细</div>
+            </div>
+            <div class="row-b" style="height: 720px">
+                <div class="line-a" style="height: 720px">
+                    <div class="table-data" id="TABLE_DATA"></div>
+
+                </div>
+                <div class="line-b" style="height: 720px">
+                    <!---->
+                    <div style="padding:8px">
+                        <p id="input1" contenteditable="true" style="word-break:break-all;">备注：</p>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="row-c">
+                <div class="line-c"><span class="cel" style="padding:3px;">合计<br/>汇款金额</span></div>
+                <div class="line-d" id="PRICE_DATA" style="text-align: center;"></div>
+            </div>
+            -->
+            <div class="row-d">
+                <div class="line-c"><span class="cel" style="line-height:50px;">备注</span></div>
+                <div class="line-d">
+                    <div style="padding:5px;">于是独立成团，如有不成团情况，提前7天告知，请收客时提前告知客人，谢谢配合！</div>
+                </div>
+            </div>
+            <div class="row-e">
+                请贵社务必于<input type="text" size="1">月<input type="text" size="1">日16:00之前将团款以汇款形式结清，并将汇款底单传真至我社，
+                具体行程以出团通知为准！逾期结款，视为自动退团，我社不予正常操作！恳请您在百忙之中予以合作，顺祝商祺！
+            </div>
+        </div>
+    </div>
+
+
+    <!--把数据动态输出到这里-->
+    <table id="SOURCE_DATA" style="display:none;">
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.number }}</td>
+                <td>{{ entry.phone }}</td>
+                <td>{{ entry.bunk }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        // 数据源(将table转换成数组)
+        var tableData = (function () {
+            var arr = [];
+            var table = document.getElementById('SOURCE_DATA');
+            var trs = table.getElementsByTagName('tr');
+
+            for (var i = 0; i < trs.length; i++) {
+                var tr = trs[i];
+                var tds = tr.getElementsByTagName('td');
+                arr.push({
+                    '姓名': tds[0].innerHTML,
+                    '金额': tds[1].innerHTML,
+                    '来源单位': tds[2].innerHTML,
+                    '铺位': tds[3].innerHTML
+                })
+            }
+            return arr;
+        })();
+
+        // 搜索
+        var search = function (key) {
+
+            var empty = key.length == 0;
+            var arr = empty ? tableData : [];
+
+            // 筛选
+            if (!empty) {
+                for (var i = 0; i < tableData.length; i++) {
+                    var item = tableData[i];
+                    var f1 = item['姓名'].indexOf(key) >= 0;
+                    var f2 = item['金额'].toString().indexOf(key) >= 0;
+                    var f3 = item['来源单位'].indexOf(key) >= 0;
+                    var f4 = item['铺位'].indexOf(key) >= 0;
+
+                    if (f1 || f2 || f3 || f4) {
+                        arr.push(item);
+                    }
+                }
+            }
+
+            // 拼接HTML
+            var html = [];
+            var all = 0;
+            for (var i = 0; i < arr.length; i++) {
+                var item = arr[i];
+                all += parseFloat(item['金额']);
+
+                html.push('<div class="row">');
+                html.push('<div class="cell-a"><span class="cel">' + (i + 1) + '</span></div>');
+                html.push('<div class="cell-b"><span class="cel">' + item['姓名'] + '</span></div>');
+                html.push('<div class="cell-c"><span class="cel">' + item['金额'] + '</span></div>');
+                html.push('<div class="cell-d"><span class="cel">' + item['来源单位'] + '</span></div>');
+                html.push('<div class="cell-e"><span class="cel">' + item['铺位'] + '</span></div>');
+                html.push('</div>');
+            }
+
+            // 输出
+            var table = document.getElementById('TABLE_DATA');
+            table.innerHTML = html.join('');
+            table.style.width = '479px';
+
+            document.getElementById('PRICE_DATA').innerHTML = all.toFixed(2);
+            document.getElementById('TOTAL_DATA').innerHTML = arr.length + '人';
+        }
+
+        search('');
+    </script>
+</div>
+<div id="div5">
+    <P id="p1">联系电话（Tel）：024-31032255&nbsp;024-31035522&nbsp;&nbsp;FAX：024-82398828</P>
+    <p id="p1">沈阳翥翔旅行社有限公司&nbsp;&nbsp;&nbsp;地址：沈阳市和平区南京北街21号远东大厦303室</p>
+</div>
+</body>
+</html>

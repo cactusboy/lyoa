@@ -14,7 +14,7 @@ class Topic(models.Model):
     date_added = models.DateField('建立时间', auto_now_add=True)
     date_start = models.DateField('出发日期')
     img = models.ImageField('图片', upload_to='img', max_length=200)
-    img_name = models.CharField('图片名称', max_length=20)
+    img_name = models.CharField('图片名称', max_length=20,null=True, blank=True)
     text = models.CharField('旅行团备注', max_length=200, null=True, blank=True, default="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
