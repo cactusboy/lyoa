@@ -13,7 +13,7 @@ class Topic(models.Model):
     route5 = models.CharField('行程5', max_length=200, null=True, blank=True)
     date_added = models.DateField('建立时间', auto_now_add=True)
     date_start = models.DateField('出发日期')
-    img = models.ImageField('图片', upload_to='img', max_length=200)
+    img = models.ImageField('图片', upload_to='img', max_length=200, help_text='文件应小于500k')
     img_name = models.CharField('图片名称', max_length=20,null=True, blank=True)
     text = models.CharField('旅行团备注', max_length=200, null=True, blank=True, default="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
